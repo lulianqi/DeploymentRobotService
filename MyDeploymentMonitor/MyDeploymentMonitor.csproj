@@ -1,0 +1,84 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <StartupObject></StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Quartz" Version="3.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="MessageRobot\DingDingHelper\Message\._DMessage.cs" />
+    <Compile Remove="MessageRobot\DingDingHelper\Message\._MarkdownMessage.cs" />
+    <Compile Remove="MessageRobot\DingDingHelper\Message\._TextMessage.cs" />
+    <Compile Remove="ShareData\MyExecuteResource.cs" />
+    <Compile Remove="MessageRobot\WeChatHelper\Message\._ImageMessage.cs" />
+    <Compile Remove="MessageRobot\WeChatHelper\Message\._MarkdownMessage.cs" />
+    <Compile Remove="MessageRobot\WeChatHelper\Message\._NewsMessage.cs" />
+    <Compile Remove="MessageRobot\WeChatHelper\Message\._WxMessage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove=".DS_Store" />
+    <None Remove="._.DS_Store" />
+    <None Remove="._bin" />
+    <None Remove="._DeploymentHelper" />
+    <None Remove="._DingDingHelper" />
+    <None Remove="._ExecuteHelper" />
+    <None Remove="._obj" />
+    <None Remove="._QuartzJob" />
+    <None Remove="._ShareData" />
+    <None Remove="._WinXinHelper" />
+    <None Remove="MessageRobot\DingDingHelper\._Message" />
+    <None Remove="ShareData\.DS_Store" />
+    <None Remove="ShareData\._.DS_Store" />
+    <None Remove="MessageRobot\WeChatHelper\._Message" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WebHelper\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="conf.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\BuildCancel.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\BuildFail.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\BuildQueued.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\BuildTimeout.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\DeploymentSuccess.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\LaunchCancel.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\LaunchFail.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\LaunchRunning.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\DeploymentCancel.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\BuildRunning.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\LaunchSkip.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ResourceFileData\LaunchTimeout.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,95 @@
+{
+	"logUrl": "https://-/deploymonitor/logs",
+	"name": "-",
+	"password": "-",
+	"url": "http://ci.-",
+	"rancherBearerToken": "token-bj4lb:-",
+	"gitPrivateToken": "-",
+	"rancherUrl": "https://-.cc",
+	"gitUrl": "https://gitlab.-.cc/",
+	"kubeSphereName": "-",
+	"kubeSpherePassword": "-",
+	"kubeSphereUrl": "http://k8s.-.cc",
+	"kubeSphereExternalDataSource": "https://gitlab.-.cc/api/v4/projects/-/repository/files/KubesphereProjectMap?ref=master",
+	"kubeSphereDevops": [
+		{
+			"devopId": "project-",
+			"maxPipeline": 500,
+			"workloadPrefix": "c--pipeline",
+			"workloadPrePrefix": "c-:pre-k8s",
+			"keyPrefix": "A",
+			"mark": "后端"
+		},
+		{
+			"devopId": "project-x",
+			"maxPipeline": 500,
+			"workloadfix": "c-fj8rb:p-/workload/deployment:p--pipeline",
+			"workloadPrefix": "c-:p-/workload/deployment:pre-k8s",
+			"keyPrefix": "B",
+			"mark": "前端"
+		}
+	],
+	"kubeSphereProjects": [
+		{
+			"Key": "1",
+			"Value": {
+				"devopId": "project-5x3rzPzOq0kX",
+				"pipelineId": "ai-crm",
+				"workloadId": "c-:p-/workload/deployment:p-6czkl-pipeline:ai-crm",
+				"workloadPreId": "c-:p-q4zb4/workload/deployment:pre-k8s:ai-crm",
+				"mark": "ai-crm 服务端",
+				"needCommit": false
+			}
+		},
+		{
+			"Key": "2",
+			"Value": {
+				"devopId": "project-MJJYNKLOXR5K",
+				"pipelineId": "aicrm",
+				"workloadId": "c-fj8rb:p-6czkl/workload/deployment:p-6czkl-pipeline:aicrm",
+				"workloadPreId": "c-7jj8d:p-q4zb4/workload/deployment:pre-k8s:aicrm",
+				"mark": "ai-crm 前端",
+				"needCommit": false
+			}
+		}
+	],
+	"robot": {
+		"DingDingRobotSecret": "——————————————————--",
+		"DingDingRobotUrl": "https://oapi.dingtalk.com/robot/send?access_token=--------------------",
+		"WinXinRobotUrl": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=---------------",
+		"DdAtPhone": [
+			{
+				"Key": "f----",
+				"Value": "12345678901"
+			}
+		],
+
+		"WxAtName": [
+			{
+				"Key": "f----",
+				"Value": "12345678901"
+			}
+		],
+
+		"WxAtPhone": [
+			{
+				"Key": "f----",
+				"Value": "12345678901"
+			}
+		]
+	},
+	"scheduler": {
+		"cron": "0 0/30 * * * ? *",
+		"schedulerProject": [
+			{
+				"Key": "NULL01",
+				"Value": "需要定时执行的命令01"
+			},
+			{
+				"Key": "NULL02",
+				"Value": "需要定时执行的命令02"
+			}
+		]
+	}
+
+}

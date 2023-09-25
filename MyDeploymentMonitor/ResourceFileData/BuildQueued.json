@@ -1,0 +1,83 @@
+﻿{
+  "config": {
+    "wide_screen_mode": true,
+    "update_multi": true
+  },
+  "elements": [
+    {
+      "tag": "note",
+      "elements": [
+        {
+          "tag": "img",
+          "img_key": "img_v2_9c690f44-a305-4faa-921b-869a0812877g",
+          "alt": {
+            "tag": "plain_text",
+            "content": "{6}"
+          }
+        },
+        {
+          "tag": "lark_md",
+          "content": "**发布状态**：队列中   \r\n**触发时间:** [{2}]    **剩余时间:** [{3}]"
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "fields": [
+        {
+          "is_short": true,
+          "text": {
+            "tag": "lark_md",
+            "content": "**🧶流水线：**\n*{4}*"
+          }
+        },
+        {
+          "is_short": true,
+          "text": {
+            "tag": "lark_md",
+            "content": "**🎬目标工程：**\n*{0}*"
+          }
+        }
+      ]
+    },
+    {
+      "alt": {
+        "content": "队列等待中......",
+        "tag": "plain_text"
+      },
+      "img_key": "img_v2_7f177857-f020-49ae-b0ce-eb1a41ed706g",
+      "preview": false,
+      "tag": "img"
+    },
+    {
+      "tag": "hr"
+    },
+    {
+      "tag": "div",
+      "text": {
+        "tag": "lark_md",
+        "content": "*triggered by {7} *"
+      },
+      "extra": {
+        "tag": "overflow",
+        "options": [
+          {
+            "text": {
+              "tag": "plain_text",
+              "content": "帮助说明"
+            },
+            "value": "appStore",
+            "url": "https://wiki.-inc.com/pages/viewpage.action?pageId=48628851#CI%E5%8F%91%E5%B8%83%E7%BB%88%E7%AB%AF-%E9%A3%9E%E4%B9%A6%E5%8F%AF%E4%BA%A4%E4%BA%92%E6%8F%90%E9%86%92"
+          }
+        ]
+      }
+    }
+  ],
+  "header": {
+    "template": "blue",
+    "title": {
+      "content": "🔵【{0}】 ({1}) 开始发布 {5} ",
+      "tag": "plain_text"
+    }
+  }
+}

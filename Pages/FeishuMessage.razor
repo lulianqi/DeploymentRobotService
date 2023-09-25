@@ -1,0 +1,236 @@
+﻿@page "/fs/SmartMessage"
+@using DeploymentRobotService.DeploymentService
+@using Pages.JsHelper
+@using Pages.PageHelper
+@using static DeploymentRobotService.Pages.PageHelper.MessageProjectPredict;
+@implements IDisposable
+@inject IJSRuntime JSRuntime
+@inject MessageService message;
+@inject NavigationManager MyNavigationManager
+
+<div style="display:none">
+</div>
+<Spin Spinning=BuildLoading Tip="正在处理···" Delay="200" Size="large" Style="height:600px">
+    <Skeleton Loading="@BuildLoading">
+        @if (!GetAnyProject)
+        {
+            <Result Icon=""
+                    Status="403"
+                    Title="未发现合适的项目"
+                    SubTitle="没有在消息在找到符合条件的发布项目，或是选择了非文本消息！">
+            </Result>
+        }
+        else
+        {
+            @if (IsBuildPre)
+            {
+                <Alert Type="@AlertType.Info" ShowIcon="true" Closable>
+                    <MessageTemplate>
+                        <Text>本页将会触发</Text><Text Type="warning">预发</Text><Text>构建</Text>
+                    </MessageTemplate>
+                </Alert>
+            }
+            <Layout Class="feishu-message-layout">
+                <Content Style="overflow:auto">
+                    <div style="padding:10px ;max-width: 600px; margin:auto" align="center">
+                        @if (ProjectSource != null)
+                        {
+                            foreach (KeyValuePair<string, Dictionary<string, ProjectBuildInfo>> projectItemSource in ProjectSource.Projects)
+                            {
+                                <Divider Orientation="left">@projectItemSource.Key</Divider>
+                                <AntList Bordered DataSource="@projectItemSource.Value" Size="small" style="background: #E1EAFF">
+                                    <ChildContent Context="item">
+                                        <ListItem>
+                                            <Dropdown Trigger="new Trigger[] { Trigger.ContextMenu }" Style="max-width:75%">
+                                                <Overlay>
+                                                    <Menu>
+                                                        <MenuItem Key="1" OnClick="@(async(e) => { item.Value.Build(ProjectSource.UserFlag, null); await message.Info($"[{item.Key}]已触发", 1); await DelayCheckProjectReply(); })">构建测试环境</MenuItem>
+                                                        <MenuItem Key="2" OnClick="@(async(e) => { item.Value.Build(ProjectSource.UserFlag, "pre");await message.Info($"[{item.Key}]已触发", 1); await DelayCheckProjectReply(); })">构建预发环境</MenuItem>
+                                                        <MenuItem Key="3" OnClick="@(async(e) => { item.Value.Build(ProjectSource.UserFlag, null, true); await message.Info($"[{item.Key}]已触发", 1); await DelayCheckProjectReply();  })">强制构建</MenuItem>
+                                                    </Menu>
+                                                </Overlay>
+                                                <ChildContent>
+                                                    <span class="nowrapspan">@item.Key</span>
+                                                </ChildContent>
+                                            </Dropdown>
+                                            @if (item.Value.HasBuild)
+                                            {
+                                                <span><Button Type="@ButtonType.Text" Size="@AntSizeLDSType.Small" Disabled="true">已发布</Button></span>
+                                            }
+                                            else
+                                            {
+                                                <span><Button Type="@ButtonType.Link" Size="@AntSizeLDSType.Small" OnClick="@(async (e) => { item.Value.Build(ProjectSource.UserFlag, ProjectSource.EnvironmentalParameter); await message.Info($"[{item.Key}]已触发", 1); await DelayCheckProjectReply(); })">发布</Button></span>
+                                            }
+                                        </ListItem>
+                                    </ChildContent>
+                                </AntList>
+                            }
+                        }
+                    </div>
+                </Content>
+                <Footer Style="background-color:white">
+                    <div style="justify-content:center;display:flex">
+                        @if (HasSendBuildReply)
+                        {
+                            <Icon Type="comment" Theme="outline" Style="font-size:8em; color:grey " />
+                        }
+                        else
+                        {
+                            <Icon Type="comment" Theme="outline" Style="font-size:8em; color:steelblue ; cursor: pointer" @onclick=@(async () => { await ReplyMessageCard(); }) />
+                        }
+                    </div>
+                    <div style="justify-content:center;display:flex">
+                        @if (HasSendBuildReply)
+                        {
+                            <span><Text Type="secondary" Strong>已回复</Text></span>
+                        }
+                        else
+                        {
+                            <Button Type="@ButtonType.Link" OnClick="@(async (e) => await ReplyMessageCard())"><Text Strong>回复发布消息</Text></Button>
+                        }
+                    </div>
+                </Footer>
+            </Layout>
+
+        }
+    </Skeleton>
+</Spin>
+
+<style>
+    .feishu-message-layout {
+        padding: 1px 1px 1px 1px;
+        background-color: white;
+        height: 100vh
+    }
+
+    .nowrapspan {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+
+
+@code
+{
+    private FeishuMessageCallBackInvokeHelper? _feishuMessageCallBackInvokeHelper;
+    private DotNetObjectReference<FeishuMessageCallBackInvokeHelper>? feishuMessageCallBackObjRef;
+    private MessageProjectPredict ProjectSource { get { return _feishuMessageCallBackInvokeHelper?.NowMessageProjectPredict; } }
+    private bool HasSendBuildReply { get; set; } = false;
+    private bool IsBuildPre { get { return ProjectSource?.HasKeyPre == true; }}
+    private bool BuildLoading
+    {
+        get
+        {
+            if (feishuMessageCallBackObjRef == null)
+            {
+                return true;
+            }
+            return !feishuMessageCallBackObjRef.Value.IsHaveDealBuildMessage;
+        }
+    }
+    private bool GetAnyProject
+    {
+        get
+        {
+            return _feishuMessageCallBackInvokeHelper?.NowMessageProjectPredict?.HasAnyProject() == true;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            //_feishuMessageCallBackInvokeHelper = new FeishuMessageCallBackInvokeHelper(message);
+            feishuMessageCallBackObjRef = DotNetObjectReference.Create(new FeishuMessageCallBackInvokeHelper(message));
+            _feishuMessageCallBackInvokeHelper = feishuMessageCallBackObjRef.Value;
+            //feishuMessageCallBackObjRef.Value.OnFeishuMessageCallBackInvokeStatusChange += CallBackInvokeStatusChange;
+            _feishuMessageCallBackInvokeHelper.OnFeishuMessageCallBackInvokeStatusChange += CallBackInvokeStatusChange;
+            await InitFeishuBuildMessage();
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    public void CallBackInvokeStatusChange(int type, string mes)
+    {
+        switch (type)
+        {
+            case 0:
+                StateHasChanged();
+                if (ProjectSource?.HasBuildAllCheck() == true)
+                {
+                    _ = ReplyMessageCard();
+                }
+                break;
+            case 11:
+                HasSendBuildReply = true;
+                StateHasChanged();
+                break;
+            default:
+                _ = message.Warning("get unsuport type in CallBackInvokeStatusChange");
+                break;
+        }
+    }
+
+    private async Task InitFeishuBuildMessage()
+    {
+        long timestamp = ApplicationRobot.FsConnector.NowFsHelper.GetTimeStamp();
+        string signature = await ApplicationRobot.FsConnector.NowFsHelper.JsTicketManager.GetWebSignature(MyNavigationManager.Uri, timestamp.ToString(), "fuxiao");
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("myFsConfig", ApplicationRobot.FsConnector.NowFsHelper.NowAppId, timestamp, "fuxiao", signature);
+            await JSRuntime.InvokeVoidAsync("dealFeishuBuildMessage", feishuMessageCallBackObjRef);//dealFeishuBuildMessage
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            _ = message.Error("请在feishu应用中打开");
+        }
+    }
+
+    private async Task DelayCheckProjectReply()
+    {
+        if(HasSendBuildReply)
+        {
+            return;
+        }
+        await Task.Delay(200);
+        if (ProjectSource?.HasBuildAllCheck() == true)
+        {
+            await ReplyMessageCard();
+        }
+    }
+
+
+    private async Task ReplyMessageCard()
+    {
+        if (_feishuMessageCallBackInvokeHelper?.NowMessageProjectPredict == null)
+        {
+            return;
+        }
+        if (!_feishuMessageCallBackInvokeHelper.NowMessageProjectPredict.HasAnyProject())
+        {
+            _ = message.Warning("未识别出任何可发布项目");
+            return;
+        }
+        await JSRuntime.InvokeVoidAsync("sendMessageCard", new SendCardMessageInfo()
+        {
+            dotnetHelper = feishuMessageCallBackObjRef,
+            receiver = _feishuMessageCallBackInvokeHelper.NowBuildMessageInfo.sender,
+            chatId = _feishuMessageCallBackInvokeHelper.NowBuildMessageInfo.chatId,
+            content = _feishuMessageCallBackInvokeHelper.NowMessageProjectPredict.GetBuildFeedback()
+        }
+            );
+    }
+
+    private async Task FsSendMessageCardTest()
+    {
+        await JSRuntime.InvokeVoidAsync("mySendMessageCard");
+    }
+
+    public void Dispose()
+    {
+        feishuMessageCallBackObjRef?.Dispose();
+    }
+    }
