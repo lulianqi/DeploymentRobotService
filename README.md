@@ -1,48 +1,48 @@
 # deploymentrobotservice
 
-#### ·¢²¼·þÎñ (DeploymentRobotService)
+#### å‘å¸ƒæœåŠ¡ (DeploymentRobotService)
 
-+ ÃüÁîÐÐ½âÊÍ·þÎñ
-+ ÃüÁîÖ´ÐÐ/¹ÜÀí·þÎñ
-+ ÆóÒµÎ¢ÐÅ·þÎñ
-+ ¶ÔÍâ±©Â¶·þÎñ
-+ Ó¦ÓÃ¹ÜÀí·þÎñ
-+ WebÒ³Ãæ·þÎñ
++ å‘½ä»¤è¡Œè§£é‡ŠæœåŠ¡
++ å‘½ä»¤æ‰§è¡Œ/ç®¡ç†æœåŠ¡
++ ä¼ä¸šå¾®ä¿¡æœåŠ¡
++ å¯¹å¤–æš´éœ²æœåŠ¡
++ åº”ç”¨ç®¡ç†æœåŠ¡
++ Webé¡µé¢æœåŠ¡
 
-#### ·¢²¼Ö´ÐÐÆ÷ (MyDeploymentMonitor)
+#### å‘å¸ƒæ‰§è¡Œå™¨ (MyDeploymentMonitor)
 
-+ Í¨Öª»úÆ÷ÈË
-  - ¶¤¶¤»úÆ÷ÈË
-  - ÆóÒµÎ¢ÐÅ»úÆ÷ÈË
-  - ·ÉÊé»úÆ÷ÈË
-  - ×Ô¶¨Òå»úÆ÷ÈË
++ é€šçŸ¥æœºå™¨äºº
+  - é’‰é’‰æœºå™¨äºº
+  - ä¼ä¸šå¾®ä¿¡æœºå™¨äºº
+  - é£žä¹¦æœºå™¨äºº
+  - è‡ªå®šä¹‰æœºå™¨äºº
 
-+ Ö´ÐÐÆ÷
-   - Ö´ÐÐÕßµ÷¶ÈÆ÷
-   - ½ø¶È¹ÜÀí¼°Ô¤²â
-   - ÔÚÏßÈÕÖ¾¹ÜÀí
++ æ‰§è¡Œå™¨
+   - æ‰§è¡Œè€…è°ƒåº¦å™¨
+   - è¿›åº¦ç®¡ç†åŠé¢„æµ‹
+   - åœ¨çº¿æ—¥å¿—ç®¡ç†
 
-+ ·¢²¼Æ÷
++ å‘å¸ƒå™¨
    - kubeSphereV2
    - kubeSphereV3
    - bamboo
    - rancher
 
-+ ¼àÊÓÆ÷
-   - ¶¨Ê±¼àÊÓÆ÷
-   - gitlab¼àÊÓÆ÷
-   - rancherÈÝÆ÷¼àÊÓÆ÷
++ ç›‘è§†å™¨
+   - å®šæ—¶ç›‘è§†å™¨
+   - gitlabç›‘è§†å™¨
+   - rancherå®¹å™¨ç›‘è§†å™¨
 
 
-![image](https://github.com/lulianqi/DeploymentRobotService/assets/23115455/0dad03f2-bc1b-4fe8-be16-1dc57d8f2f34)
-ÆäÖÐDeploymentRobotServiceÎªÆô¶¯¹¤³Ì£¬Æäµ÷ÊÔÐèÒªÅäÖÃÆóÒµÎ¢ÐÅ/¶¤¶¤/·ÉÊéÓ¦ÓÃ»Øµ÷¼°ÄÚÍâ´©Í¸
-ÆäÖÐMyDeploymentMonitorÖ´ÐÐÆ÷¿É¶ÀÁ¢ÒÔÃüÁîÐÐÖÕ¶ËµÄÐÎÊ½ÔËÐÐÓÚ±¾µØ
-mac£º dotnet MyBambooMonitor.dll
-liunx£º dotnet MyBambooMonitor.dll
-windows£º Ë«»÷ MyBambooMonitor.exe
+![image](https://github.com/lulianqi/DeploymentRobotService/assets/23115455/8c89eb6a-e8f4-4d8e-9f6c-8471b4ff78cf)
+å…¶ä¸­DeploymentRobotServiceä¸ºå¯åŠ¨å·¥ç¨‹ï¼Œå…¶è°ƒè¯•éœ€è¦é…ç½®ä¼ä¸šå¾®ä¿¡/é’‰é’‰/é£žä¹¦åº”ç”¨å›žè°ƒåŠå†…å¤–ç©¿é€
+å…¶ä¸­MyDeploymentMonitoræ‰§è¡Œå™¨å¯ç‹¬ç«‹ä»¥å‘½ä»¤è¡Œç»ˆç«¯çš„å½¢å¼è¿è¡ŒäºŽæœ¬åœ°
+macï¼š dotnet MyBambooMonitor.dll
+liunxï¼š dotnet MyBambooMonitor.dll
+windowsï¼š åŒå‡» MyBambooMonitor.exe
 
-DeploymentRobotService ÒÔ·þÎñÐÎÊ½Æô¶¯£¬Í¬Ê±Ìá¹©web api¼°html webÒ³Ãæ¡£
-ÒÑ°üº¬dockerfile¿ÉÒÔÈÝÆ÷ÐÎÊ½²¿Êð¡£
+DeploymentRobotService ä»¥æœåŠ¡å½¢å¼å¯åŠ¨ï¼ŒåŒæ—¶æä¾›web apiåŠhtml webé¡µé¢ã€‚
+å·²åŒ…å«dockerfileå¯ä»¥å®¹å™¨å½¢å¼éƒ¨ç½²ã€‚
 
-ÏÂÃæ½ö¹©²Î¿¼£¬²»Í¬ÍÅ¶ÓÊ¹ÓÃµÄCIÆ½Ì¨¿ÉÄÜ²»Ò»Ñù£¬ÐèÒªÊµÏÖ×Ô¼ºµÄ·¢²¼Æ÷¡£ÏîÄ¿ÖÐÅäÖÃÎÄ¼þ¹Ø¼ü/Ãô¸ÐÐÅÏ¢ÒÑ¾­É¾³ý£¬ÏîÄ¿ÎÞ·¨Ö±½ÓÆô¶¯¡£
+ä¸‹é¢ä»…ä¾›å‚è€ƒï¼Œä¸åŒå›¢é˜Ÿä½¿ç”¨çš„CIå¹³å°å¯èƒ½ä¸ä¸€æ ·ï¼Œéœ€è¦å®žçŽ°è‡ªå·±çš„å‘å¸ƒå™¨ã€‚é¡¹ç›®ä¸­é…ç½®æ–‡ä»¶å…³é”®/æ•æ„Ÿä¿¡æ¯å·²ç»åˆ é™¤ï¼Œé¡¹ç›®æ— æ³•ç›´æŽ¥å¯åŠ¨ã€‚
 
