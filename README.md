@@ -51,7 +51,7 @@ deploymentrobotservice由2部分组成。DeploymentRobotService服务本身，My
 + liunx： dotnet MyBambooMonitor.dll
 + windows： 双击 MyBambooMonitor.exe
 
-DeploymentRobotService 以服务形式启动，同时提供web api及html web页面。（自承载一个blazor sever服务，页面组件来自https://github.com/lulianqi/ant-design-blazor）  
+DeploymentRobotService 以服务形式启动，同时提供web api及html web页面。（自承载一个blazor sever服务，页面组件来自[ant-design-blazor](https://github.com/lulianqi/ant-design-blazor)）  
 已包含dockerfile可以容器形式部署。
 
 *工程由测试程序演进而来，部分实现扩展性欠佳，项目仅供参考。*  
